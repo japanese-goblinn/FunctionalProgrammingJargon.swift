@@ -1,21 +1,6 @@
-# Functional Programming Jargon
+# Functional Programming Jargon in Swift
 
-Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
-
-Examples are presented in JavaScript (ES2015). [Why JavaScript?](https://github.com/hemanth/functional-programming-jargon/wiki/Why-JavaScript%3F)
-
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
-
-__Translations__
-* [Portuguese](https://github.com/alexmoreno/jargoes-programacao-funcional)
-* [Spanish](https://github.com/idcmardelplata/functional-programming-jargon/tree/master)
-* [Chinese](https://github.com/shfshanyue/fp-jargon-zh)
-* [Bahasa Indonesia](https://github.com/wisn/jargon-pemrograman-fungsional)
-* [Python World](https://github.com/jmesyou/functional-programming-jargon.py)
-* [Scala World](https://github.com/ikhoon/functional-programming-jargon.scala)
-* [Rust World](https://github.com/JasonShin/functional-programming-jargon.rs)
-* [Korean](https://github.com/sphilee/functional-programming-jargon)
-* [Haskell Turkish](https://github.com/mrtkp9993/functional-programming-jargon)
+This is a fork of [Functional Programming Jargon](https://github.com/hemanth/functional-programming-jargon) in `JavaScript`.
 
 __Table of Contents__
 <!-- RM(noparent,notop) -->
