@@ -1060,25 +1060,8 @@ times(-1)(console.log)
 ```
 Making your partial functions total ones, these kinds of runtime errors can be prevented. Always returning a value will also make for code that is both easier to maintain as well as to reason about.
 
-## Functional Programming Libraries in JavaScript
+## Functional Programming Libraries in Swift
 
-* [mori](https://github.com/swannodette/mori)
-* [Immutable](https://github.com/facebook/immutable-js/)
-* [Immer](https://github.com/mweststrate/immer)
-* [Ramda](https://github.com/ramda/ramda)
-* [ramda-adjunct](https://github.com/char0n/ramda-adjunct)
-* [Folktale](http://folktale.origamitower.com/)
-* [monet.js](https://cwmyers.github.io/monet.js/)
-* [lodash](https://github.com/lodash/lodash)
-* [Underscore.js](https://github.com/jashkenas/underscore)
-* [Lazy.js](https://github.com/dtao/lazy.js)
-* [maryamyriameliamurphies.js](https://github.com/sjsyrek/maryamyriameliamurphies.js)
-* [Haskell in ES6](https://github.com/casualjavascript/haskell-in-es6)
-* [Sanctuary](https://github.com/sanctuary-js/sanctuary)
-* [Crocks](https://github.com/evilsoft/crocks)
-* [Fluture](https://github.com/fluture-js/Fluture)
-* [fp-ts](https://github.com/gcanti/fp-ts)
+* [pointfreeco/swift-overture: A library for function composition.](https://github.com/pointfreeco/swift-overture)
+* [pointfreeco/swift-prelude: A collection of types and functions that enhance the Swift language.](https://github.com/pointfreeco/swift-prelude)
 
----
-
-__P.S:__ This repo is successful due to the wonderful [contributions](https://github.com/hemanth/functional-programming-jargon/graphs/contributors)!
