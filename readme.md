@@ -63,13 +63,28 @@ __Table of Contents__
 
 The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
 
-```js
-const sum = (a, b) => a + b
+```swift
+// some overengineering
+func arity(of f: Any) -> Int? {
+  let mirror = Mirror(reflecting: f)
+  let stringRepr = String(reflecting: mirror.subjectType)
+  let fSymbol = "->"
+  return stringRepr.contains(fSymbol) 
+    ? stringRepr
+        .components(separatedBy: fSymbol)
+        .first?
+        .split(separator: ",")
+        .compactMap { $0.contains("()") ? nil : $0 }
+        .count
+    : nil
+}
 
-const arity = sum.length
-console.log(arity) // 2
-
-// The arity of sum is 2
+let f1: (Int) -> Void = { _ in }
+let f3: (Int, Int, Int) -> Void = { _, _, _ in }
+// The arity of f1 is 1
+print("The arity of f1 is \(arity(of: f1)!)")
+// The arity of f3 is 3
+print("The arity of f3 is \(arity(of: f3)!)")
 ```
 
 ## Higher-Order Functions (HOF)
