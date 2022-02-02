@@ -310,18 +310,11 @@ console.log('IO is a side effect!')
 
 ## Idempotent
 
-A function is idempotent if reapplying it to its result does not produce a different result.
+If function can be applied multiple times without changing the result beyond initial application than this an `idempontent` function.
 
-```
-f(f(x)) ≍ f(x)
-```
-
-```js
-Math.abs(Math.abs(10))
-```
-
-```js
-sort(sort(sort([2, 1])))
+```swift
+print(abs(abs(10)))
+print([2, 1].sorted().sorted().sorted())
 ```
 
 ## Point-Free Style
