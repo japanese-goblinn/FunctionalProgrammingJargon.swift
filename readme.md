@@ -61,30 +61,50 @@ __Table of Contents__
 
 ## Arity
 
-The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
+The number of arguments taken by a function. If arity of function is `0` than is's called a `nullary` function, if `1` - `unary` function, etc. Basicly that's it, to learn more read [wiki](https://en.wikipedia.org/wiki/Arity#Ternary)
 
 ```swift
-// some overengineering
-func arity(of f: Any) -> Int? {
-  let mirror = Mirror(reflecting: f)
-  let stringRepr = String(reflecting: mirror.subjectType)
-  let fSymbol = "->"
-  return stringRepr.contains(fSymbol) 
-    ? stringRepr
-        .components(separatedBy: fSymbol)
-        .first?
-        .split(separator: ",")
-        .compactMap { $0.contains("()") ? nil : $0 }
-        .count
-    : nil
-}
-
+let f0: () -> Void = {}
 let f1: (Int) -> Void = { _ in }
+let f2: (Int, Int) -> Void = { _, _ in }
 let f3: (Int, Int, Int) -> Void = { _, _, _ in }
-// The arity of f1 is 1
-print("The arity of f1 is \(arity(of: f1)!)")
-// The arity of f3 is 3
-print("The arity of f3 is \(arity(of: f3)!)")
+let f4: (Int, Int, Int, Int) -> Void = { _, _, _, _ in }
+// no closure literal for closure expression with variadic parameter :c
+func fvar(_ a: Int...) { }
+let fvar: (Int...) -> Void = fvar
+
+print("f0 is \(name(of: f0)!) function") // f0 is Nullary function
+print("f1 is \(name(of: f1)!) function") // f1 is Unary function
+print("f2 is \(name(of: f2)!) function") // f1 is Binary function
+print("f3 is \(name(of: f3)!) function") // f3 is Ternary function
+print("f4 is \(name(of: f4)!) function") // f4 is n-ary function
+print("fvar is \(name(of: fvar)!) function") // fvar is Varying arity function 
+
+// some overengineering
+func name(of f: Any) -> String? {
+  let mirror = Mirror(reflecting: f)
+  let stringRepresentation = String(reflecting: mirror.subjectType)
+  let returnSymbol = "->"
+  guard
+    stringRepresentation.contains(returnSymbol),
+    let arguments = stringRepresentation
+      .components(separatedBy: returnSymbol)
+      .first?
+      .split(separator: ",")
+  else { return nil }
+  guard !(arguments.first?.contains("...") ?? false) else {
+    return "Varying arity"
+  }
+  guard !(arguments.first?.contains("()") ?? false) else {
+    return "Nullary"
+  }
+  switch arguments.count {
+  case 1:  return "Unary"
+  case 2:  return "Binary"
+  case 3:  return "Ternary"
+  default: return "n-ary"
+  }
+}
 ```
 
 ## Higher-Order Functions (HOF)
