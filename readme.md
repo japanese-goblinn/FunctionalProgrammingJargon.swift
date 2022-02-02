@@ -300,15 +300,15 @@ greeting // "Hi, Brianne"
 
 A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
 
-```js
-const differentEveryTime = new Date()
+```swift
+func sum(_ a: Int, _ b: Int) -> Int {
+  _ = Date() // synchronization with the clock is a side effect
+  print("IO is a side effect!")
+  return a + b
+}
 ```
 
-```js
-console.log('IO is a side effect!')
-```
-
-## Idempotent
+## Idempotence
 
 If function can be applied multiple times without changing the result beyond initial application than this an `idempontent` function.
 
