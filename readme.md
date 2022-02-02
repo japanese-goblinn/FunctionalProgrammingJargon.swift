@@ -109,18 +109,15 @@ func name(of f: Any) -> String? {
 
 ## Higher-Order Functions (HOF)
 
-A function which takes a function as an argument and/or returns a function.
+A function which takes a function as an argument and/or returns a function. [`filter(_:)`](https://developer.apple.com/documentation/swift/sequence/3018365-filter) is a good example of HOF.
 
-```js
-const filter = (predicate, xs) => xs.filter(predicate)
-```
-
-```js
-const is = (type) => (x) => Object(x) instanceof type
-```
-
-```js
-filter(is(Number), [0, '1', 2, null]) // [0, 2]
+```swift
+let array = [1, 2, 3, 4, 5]
+func makeIsEven() -> (Int) -> Bool {
+  { $0.isMultiple(of: 2) }
+}
+let isEven = makeIsEven()
+print(array.filter(isEven)) // [2, 4]
 ```
 
 ## Closure
