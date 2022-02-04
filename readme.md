@@ -1,6 +1,6 @@
 # Functional Programming Jargon in Swift
 
-This is a fork of [Functional Programming Jargon](https://github.com/hemanth/functional-programming-jargon) implemented in [Swift](https://github.com/apple/swift).
+This is a fork of [Functional Programming Jargon](https://github.com/hemanth/functional-programming-jargon) adapted and rethought in [Swift](https://github.com/apple/swift)
 
 __Table of Contents__
 <!-- RM(noparent,notop) -->
