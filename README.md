@@ -5,9 +5,9 @@ This is a fork of [Functional Programming Jargon](https://github.com/hemanth/fun
 __Table of Contents__
 <!-- RM(noparent,notop) -->
 
+* [Closure](#closure)
 * [Arity](#arity)
 * [Higher-Order Functions (HOF)](#higher-order-functions-hof)
-* [Closure](#closure)
 * [Partial Application](#partial-application)
 * [Currying](#currying)
 * [Auto Currying](#auto-currying)
@@ -58,6 +58,54 @@ __Table of Contents__
 
 
 <!-- /RM -->
+
+## Closure
+
+Closure is a function that captures variable/constant outside it's own scope. 
+
+Implicit capturing outside scope in Swift is called *closing over*. 
+
+```swift
+var counter = 0
+let one = 1 
+let increment: () -> Void = {
+  counter += one // impicitly captures counter and one
+}
+increment()
+print(counter) // 1
+increment()
+print(counter) // 2
+```
+
+We also can use *capture list* to capture explicitly
+
+```swift
+var counter = 0
+let one = 1 
+let increment: () -> Int = { [counter, one] in 
+  counter + one // impicitly captures counter and one. notice that counter is copied in this case
+}
+increment()
+print(counter) // 0
+increment()
+print(counter) // 0 
+```
+
+We should distinguish closures and closure expressions in Swift.
+
+```swift
+let a = {} // <- this {} is a closure exression, not closure
+```
+
+But in Swift closure also have another meaning. Closure is eather global function that don't capture or nested function that can capture 
+
+- Global function that have a name and don’t capture any values
+- Nested functions are closures that have a name and can capture values from their enclosing function.
+- Closure expressions are unnamed closures written in a lightweight syntax that can capture values from their surrounding context.
+
+### Further reading
+
+[Closures — The Swift Programming Language](https://docs.swift.org/swift-book/LanguageGuide/Closures.html)
 
 ## Arity
 
@@ -120,42 +168,12 @@ let isEven = makeIsEven()
 print(array.filter(isEven)) // [2, 4]
 ```
 
-## Closure
-
-A closure is a way of accessing a variable outside its scope.
-Formally, a closure is a technique for implementing lexically scoped named binding. It is a way of storing a function with an environment.
-
-A closure is a scope which captures local variables of a function for access even after the execution has moved out of the block in which it is defined.
-ie. they allow referencing a scope after the block in which the variables were declared has finished executing.
-
-
-```js
-const addTo = x => y => x + y;
-var addToFive = addTo(5);
-addToFive(3); //returns 8
-```
-The function ```addTo()``` returns a function(internally called ```add()```), lets store it in a variable called ```addToFive``` with a curried call having parameter 5.
-
-Ideally, when the function ```addTo``` finishes execution, its scope, with local variables add, x, y should not be accessible. But, it returns 8 on calling ```addToFive()```. This means that the state of the function ```addTo``` is saved even after the block of code has finished executing, otherwise there is no way of knowing that ```addTo``` was called as ```addTo(5)``` and the value of x was set to 5.
-
-Lexical scoping is the reason why it is able to find the values of x and add - the private variables of the parent which has finished executing. This value is called a Closure.
-
-The stack along with the lexical scope of the function is stored in form of reference to the parent. This prevents the closure and the underlying variables from being garbage collected(since there is at least one live reference to it).
-
-Lambda Vs Closure: A lambda is essentially a function that is defined inline rather than the standard method of declaring functions. Lambdas can frequently be passed around as objects.
-
-A closure is a function that encloses its surrounding state by referencing fields external to its body. The enclosed state remains across invocations of the closure.
-
-__Further reading/Sources__
-* [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
-* [JavaScript Closures highly voted discussion](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
-
 ## Partial Application
 
 Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
 
 
-```js
+```swift
 // Helper to create partially applied functions
 // Takes a function and some arguments
 const partial = (f, ...args) =>
@@ -500,7 +518,7 @@ const greet = () => 'Hello World!'
 Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
 referentially transparent.
 
-##  Equational Reasoning
+## Equational Reasoning
 
 When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
 
@@ -826,7 +844,7 @@ const sum = (list) => list.reduce((acc, val) => acc + val, 0)
 sum([1, 2, 3]) // 6
 ```
 
-## Lens ##
+## Lens
 A lens is a structure (often an object or function) that pairs a getter and a non-mutating setter for some other data
 structure.
 
@@ -1074,4 +1092,3 @@ Making your partial functions total ones, these kinds of runtime errors can be p
 
 * [pointfreeco/swift-overture: A library for function composition.](https://github.com/pointfreeco/swift-overture)
 * [pointfreeco/swift-prelude: A collection of types and functions that enhance the Swift language.](https://github.com/pointfreeco/swift-prelude)
-
